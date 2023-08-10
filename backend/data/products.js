@@ -1,6 +1,5 @@
 const products = [
   {
-    _id: '1',
     name: 'Luffy',
     image: '/images/luffy01.avif',
     description:
@@ -13,7 +12,6 @@ const products = [
     numReviews: 12,
   },
   {
-    _id: '2',
     name: 'Zoro',
     image: '/images/Zoro01.jpg',
     description:
@@ -26,7 +24,6 @@ const products = [
     numReviews: 8,
   },
   {
-    _id: '3',
     name: 'Nami',
     image: '/images/Nami01.jpg',
     description:
@@ -39,7 +36,6 @@ const products = [
     numReviews: 12,
   },
   {
-    _id: '4',
     name: 'Obito',
     image: '/images/Obito.webp',
     description:
@@ -52,7 +48,6 @@ const products = [
     numReviews: 12,
   },
   {
-    _id: '5',
     name: 'Itachi',
     image: '/images/Itachi01.jpg',
     description:
@@ -65,7 +60,6 @@ const products = [
     numReviews: 10,
   },
   {
-    _id: '6',
     name: 'Eren',
     image: '/images/Eren01.webp',
     description:
