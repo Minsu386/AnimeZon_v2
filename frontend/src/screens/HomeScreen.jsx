@@ -17,6 +17,7 @@ const HomeScreen = () => {
         <Message variant='danger'>{ error?.data?.message || error.error }</Message>
         ) : (
           <>
+          <Message variant='warning'>This is a Development practice application. No real products or function</Message>
           <h1>Latest Products</h1>
           <Row>
             {/* loop through products and place into column */}
