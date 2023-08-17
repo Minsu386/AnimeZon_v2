@@ -1,49 +1,44 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit';
+import { updateCart } from '../utils/cartUtils';
 
-const initialState = localStorage.getItem('cart') 
+const initialState = localStorage.getItem('cart')
   ? JSON.parse(localStorage.getItem('cart'))
-  : {cartItems: []};
-
-const addDecimals = (num) => {
-  return (Math.round(num * 100) / 100).toFixed(2)
-}
+  : { cartItems: [] };
 
 const cartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
     addToCart: (state, action) => {
+      // The item to add to the cart
       const item = action.payload;
 
+      // Check if the item is already in the cart
       const existItem = state.cartItems.find((x) => x._id === item._id);
 
-      if(existItem) {
-        state.cartItems = state.cartItems.map((x) => x._id === existItem._id ? item : x);
+      if (existItem) {
+        // If exists, update quantity
+        state.cartItems = state.cartItems.map((x) =>
+          x._id === existItem._id ? item : x
+        );
       } else {
-        state.cartItems = [...state.cartItems]
+        // If not exists, add new item to cartItems
+        state.cartItems = [...state.cartItems, item];
       }
 
-      // Calc item price
-      state.itemPrice = addDecimals(state.cartItems.reduce((acc, item) => acc + item.price * item.qty, 0));
+      // Update the prices and save to storage
+      return updateCart(state, item);
+    },
+    removeFromCart: (state, action) => {
+      // Filter out the item to remove from the cart
+      state.cartItems = state.cartItems.filter((x) => x._id !== action.payload);
 
-      // Calc S&H  If order is > $100 free, else $10 S&H
-      state.shippingPrice = addDecimals(state.itemsPrice > 100 ? 0 : 10);
-
-      // calc tax price (6% for Fl)
-      state.taxPrice = addDecimals(Number(0.06 * state.itemsPrice).toFixed(2));
-
-      // calc Total Price
-      state.totalPrice = (
-        Number(state.itemPrice) +
-        Number(state.shippingPrice) +
-        Number(state.taxPrice)
-      ).toFixed(2);
-
-      localStorage.setItem('cart', JSON.stringify(state));
+      // Update the prices and save to storage
+      return updateCart(state);
     },
   },
 });
 
-export const { addToCart } = cartSlice.actions;
+export const { addToCart, removeFromCart } = cartSlice.actions;
 
 export default cartSlice.reducer;
