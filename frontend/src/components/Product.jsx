@@ -3,6 +3,7 @@ import { Card } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import Rating from './Rating'
 
+
 // take in product as a prop and take in product
 const Product = ({ product }) => {
   return (

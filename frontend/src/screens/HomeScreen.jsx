@@ -7,6 +7,7 @@ import Loader from '../components/Loader';
 import Message from '../components/Message';
 import Paginate from '../components/Paginate';
 import ProductCarousel from '../components/ProductCarousel';
+import Meta from '../components/Meta';
 
 const HomeScreen = () => {
   const { pageNumber, keyword } = useParams();
@@ -27,6 +28,7 @@ const HomeScreen = () => {
         ) : (
           <>
           <Message variant='warning'>This is a Development practice application. No real products or function</Message>
+          <Meta title='Welcome to AnimeZon'/>
           <h1>Latest Products</h1>
           <Row>
             {/* loop through products and place into column */}
